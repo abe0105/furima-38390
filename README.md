@@ -35,7 +35,7 @@ itemsテーブル
 association
 
 belongs_to :user
-has_one :addresses
+has_one :purchase
 
 
 
@@ -52,20 +52,19 @@ addressesテーブル
 | purchase              |references |null: false, foreign_key_true  |
 ---------------------------------------------------------------------
 
-association
-
-belongs_to :purchases
+belongs_to :item
+belongs_to :user
+has_one :address
 
 
 purchasesテーブル
 | column                | type      | options                       |
 ---------------------------------------------------------------------
 | user                  |references  |null: false, foreign_key_true |        
-| product_id            |references  |null: false, foreign_key_true |
+| product               |references  |null: false, foreign_key_true |
 ---------------------------------------------------------------------
 
 association
 
-has_one :addresses
-belongs_to :user
-belongs_to :items
+has_one :address
+belongs_to :item
