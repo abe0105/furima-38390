@@ -3,7 +3,7 @@ usersテーブル
 | column                | type      | options                      |
 --------------------------------------------------------------------
 | nickname              |string     |null: false                   |
-| email                 |string     |uniqueness: true              |
+| email                 |string     |null: false, unique: true     |
 | first_name            |string     |null: false                   |
 | last_name             |string     |null: false                   |
 | kana_first_name       |string     |null: false                   |
@@ -15,6 +15,7 @@ usersテーブル
 association
 
 has_many :items
+has_many :purchases
 
 itemsテーブル
 | column                | type      | options                       |
@@ -43,7 +44,7 @@ addressesテーブル
 | column                | type      | options                       |
 ---------------------------------------------------------------------
 | post_code             |string     |null: false                    |
-| prefecture_id         |string     |null: false                    |
+| prefecture_id         |integer    |null: false                    |
 | municipality          |string     |null: false                    |
 | address               |string     |null: false                    |
 | building_name         |string     |                               |
@@ -51,15 +52,20 @@ addressesテーブル
 | purchase              |references |null: false, foreign_key_true  |
 ---------------------------------------------------------------------
 
-belongs_to :items
-has_one :addresses
+association
+
+belongs_to :purchases
 
 
 purchasesテーブル
 | column                | type      | options                       |
 ---------------------------------------------------------------------
 | user                  |references  |null: false, foreign_key_true |        
-| product               |references  |null: false, foreign_key_true |
+| product_id            |references  |null: false, foreign_key_true |
 ---------------------------------------------------------------------
 
-belongs_to :addresses
+association
+
+has_one :addresses
+belongs_to :user
+belongs_to :items
