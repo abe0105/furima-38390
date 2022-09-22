@@ -52,16 +52,16 @@ addressesテーブル
 | purchase              |references |null: false, foreign_key_true  |
 ---------------------------------------------------------------------
 
-belongs_to :item
-belongs_to :user
-has_one :address
+association
+
+has_one :purchase
 
 
 purchasesテーブル
 | column                | type      | options                       |
 ---------------------------------------------------------------------
 | user                  |references  |null: false, foreign_key_true |        
-| product               |references  |null: false, foreign_key_true |
+| item              |references  |null: false, foreign_key_true |
 ---------------------------------------------------------------------
 
 association
