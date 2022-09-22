@@ -49,22 +49,24 @@ addressesテーブル
 | address               |string     |null: false                    |
 | building_name         |string     |                               |
 | phone_number          |string     |null: false                    | 
-| purchase              |references |null: false, foreign_key_true  |
+| purchase              |references |null: false, foreign_key: true |
 ---------------------------------------------------------------------
 
 association
 
 has_one :purchase
+belongs_to :purchase
 
 
 purchasesテーブル
 | column                | type      | options                       |
 ---------------------------------------------------------------------
-| user                  |references  |null: false, foreign_key_true |        
-| item              |references  |null: false, foreign_key_true |
+| user                  |references  |null: false,foreign_key: true |        
+| item              |references  |null: false,    foreign_key: true |
 ---------------------------------------------------------------------
 
 association
 
 has_one :address
 belongs_to :item
+belongs_to :user
