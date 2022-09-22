@@ -28,7 +28,7 @@ itemsテーブル
 | prefecture_id         |integer     |null: false                   |
 | days_to_ship_id       |integer     |null: false                   |
 | price                 |integer     |null: false                   |
-| user                  |references  |null: false, foreign_key_true |
+| user                  |references  |null: false, foreign_key: true|
 ---------------------------------------------------------------------
 
 
@@ -62,7 +62,7 @@ purchasesテーブル
 | column                | type      | options                       |
 ---------------------------------------------------------------------
 | user                  |references  |null: false,foreign_key: true |        
-| item              |references  |null: false,    foreign_key: true |
+| item                  |references  |null: false,foreign_key: true |
 ---------------------------------------------------------------------
 
 association
