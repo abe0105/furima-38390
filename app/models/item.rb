@@ -3,6 +3,12 @@ class Item < ApplicationRecord
   belongs_to :category
 
   has_one_attached :image
+  belongs_to       :user
+  belongs_to       :category  
+  belongs_to       :commodity_condition   
+  belongs_to       :shipping_charges 
+  belongs_to       :prefecture    
+  belongs_to       :days_to_ship
 
 
 
@@ -23,6 +29,6 @@ class Item < ApplicationRecord
     validates :prefecture_id,           numericality: { other_than: 0, message: 'select' }
     validates :days_to_ship_id,         numericality: { other_than: 0, message: 'select' }
 
-    validates :price, format: { with: /\A[0-9]+\z/, message: 'Price Half-width number' }, inclusion: { in: (300..9_999_999), message: 'Out of setting range' }
+    validates :price, numericality: { only_integer: true, message: 'Price Half-width number' }, inclusion: { in: (300..9_999_999), message: 'Out of setting range' }
 
 end
