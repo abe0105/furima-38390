@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :require_login, only: :new, alert: 'You need to sign in or sign up before continuing.'
-
+  before_action :set_item, only: [:edit, :show, :update]
   def index
     @items = Item.order(id: 'DESC')
   end
@@ -20,7 +20,19 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    
+  end
+
+  def edit
+    redirect_to root_path if current_user != @item.user 
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render 'edit'
+    end
   end
   
     private
@@ -31,6 +43,11 @@ class ItemsController < ApplicationController
   
     def item_params
       params.require(:item).permit(:image, :name, :explanation, :category_id, :commodity_condition_id, :shipping_charges_id, :prefecture_id, :days_to_ship_id, :price).merge(user_id: current_user.id)
+    end
+
+
+    def set_item
+      @item = Item.find(params[:id])
     end
   end
 
