@@ -2,9 +2,13 @@ class ItemsController < ApplicationController
 
   before_action :require_login, only: :new, alert: 'You need to sign in or sign up before continuing.'
   before_action :set_item, only: [:edit, :show, :update, :destroy]
+  before_action :user_match?, only: [:edit, :destroy]
+
   def index
     @items = Item.order(id: 'DESC')
   end
+
+ 
 
   def new
     @item = Item.new
@@ -24,7 +28,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path if current_user != @item.user 
+    
   end
 
   def update
@@ -56,6 +60,10 @@ class ItemsController < ApplicationController
 
     def set_item
       @item = Item.find(params[:id])
+    end
+
+    def user_match?
+      redirect_to root_path if current_user != @item.user || Purchase.find_by(item_id: @item.id)
     end
   end
 
