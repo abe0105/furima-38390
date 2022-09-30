@@ -8,9 +8,7 @@ class ItemsController < ApplicationController
     @items = Item.order(id: 'DESC')
   end
 
-  def user_match?
-    redirect_to root_path if current_user != @item.user
-  end
+ 
 
   def new
     @item = Item.new
@@ -30,7 +28,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path if current_user != @item.user|| Purchase.find_by(item_id: @item.id)
+    Purchase.find_by(item_id: @item.id)
   end
 
   def update
@@ -62,6 +60,10 @@ class ItemsController < ApplicationController
 
     def set_item
       @item = Item.find(params[:id])
+    end
+
+    def user_match?
+      redirect_to root_path if current_user != @item.user
     end
   end
 
