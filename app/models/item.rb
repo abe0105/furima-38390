@@ -23,12 +23,12 @@ class Item < ApplicationRecord
     validates :price,                   presence: true
 
 
-    validates :category_id,             numericality: { other_than: 0, message: 'select' }
-    validates :commodity_condition_id,  numericality: { other_than: 0, message: 'select' }
-    validates :shipping_charges_id,     numericality: { other_than: 0, message: 'select' }
-    validates :prefecture_id,           numericality: { other_than: 0, message: 'select' }
-    validates :days_to_ship_id,         numericality: { other_than: 0, message: 'select' }
+    validates :category_id,             numericality: { other_than: 0, message: 'を選択してください' }
+    validates :commodity_condition_id,  numericality: { other_than: 0, message: 'を選択してください' }
+    validates :shipping_charges_id,     numericality: { other_than: 0, message: 'を選択してください' }
+    validates :prefecture_id,           numericality: { other_than: 0, message: 'を選択してください' }
+    validates :days_to_ship_id,         numericality: { other_than: 0, message: 'を選択してください' }
 
-    validates :price, numericality: { only_integer: true, message: 'Price Half-width number' }, inclusion: { in: (300..9_999_999), message: 'Out of setting range' }
+    validates :price, numericality: { only_integer: true, message: 'を半角数字で入力してください' }, inclusion: { in: (300..9_999_999), message: 'の設定範囲外の値段です' }
 
 end
